@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://example.com/2022/12/15/DP1.4%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E6%A6%82%E8%A7%88/2022-12-15-13-41-07.png">
 <meta property="og:image" content="http://example.com/2022/12/15/DP1.4%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E6%A6%82%E8%A7%88/2022-12-15-14-27-07.png">
 <meta property="article:published_time" content="2022-12-15T06:50:23.000Z">
-<meta property="article:modified_time" content="2022-12-15T08:13:45.220Z">
+<meta property="article:modified_time" content="2022-12-15T08:17:48.548Z">
 <meta property="article:author" content="Duorui">
 <meta property="article:tag" content="DP1.4协议学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -325,7 +325,8 @@
 <p> <code>视频、音频流数据被打包成“微包”，在SST（单流传输）模式下称为“传输单元”</code>，在MST（多流传输）模式下称为MTP（多流传输包）”。<code>将流数据打包并映射到Main-Link后，打包的流数据速率将等于或小于主链的链接符号速率，当它较小时，将插入填充符号。（因为Main-Link的速率是固定可选的，Main-Link的速率必须大于视频流的速率才能正常传输）</code></p>
 </li>
 </ul>
-<h2 id="关于bpp和bpc的解释："><a href="#关于bpp和bpc的解释：" class="headerlink" title="关于bpp和bpc的解释："></a><em>关于bpp和bpc的解释</em>：<img src="/2022/12/15/DP1.4%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E6%A6%82%E8%A7%88/2022-12-15-13-41-07.png" srcset="/img/loading.gif" lazyload class=""></h2><h3 id="2-AUX-CH通道的组成及工作方式"><a href="#2-AUX-CH通道的组成及工作方式" class="headerlink" title="2.AUX CH通道的组成及工作方式"></a>2.AUX CH通道的组成及工作方式</h3><ul>
+<h5 id="关于bpp和bpc的解释："><a href="#关于bpp和bpc的解释：" class="headerlink" title="关于bpp和bpc的解释："></a><em>关于bpp和bpc的解释</em>：<img src="/2022/12/15/DP1.4%E5%8D%8F%E8%AE%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E6%A6%82%E8%A7%88/2022-12-15-13-41-07.png" srcset="/img/loading.gif" lazyload class=""></h5><hr>
+<h3 id="2-AUX-CH通道的组成及工作方式"><a href="#2-AUX-CH通道的组成及工作方式" class="headerlink" title="2.AUX CH通道的组成及工作方式"></a>2.AUX CH通道的组成及工作方式</h3><ul>
 <li><p>特性：AUX CH由一个交流耦合的双端差分对组成。Mhenset-II编码用作AUX CH上AUX交易的通道编码。与Main-Link的情况一样，时钟是从数据流中提取的。AUX CH具有一个半双工、双向的PHY层。源设备是主设备，接收器设备是从设备。接收器设备可以发起HPD信号，以提示源设备发起AUX请求事务，以读取DPCD链接&#x2F;接收器状态寄存器位，包括IRQ_HPD矢量寄存器位。AUX CH为15m或更长的电缆长度提供1Mbps的数据速率。每个事务需要不超过500个我们，最大突发数据大小为16字节。这避免了一个应用程序缺少其他应用程序引起的AUX CH争用问题。</p>
 </li>
 <li><p>工作流程：在发生HPD事件时，源设备会通过链路训练来配置链路。通过在AUX CH上的DPTX和DPRX之间的AUX事务，以正确的链接速率和正确的驱动电流和均衡水平启用正确的通道数。在链路训练之后的正常操作期间，接收设备可以通过切换中断请求信号的HPD信号来通知链路状态的变化，例如，失去同步。然后，源设备使用AUX事务检查DPCD链路&#x2F;接收器设备状态寄存器，然后采取纠正措施。这种闭环操作增强了源设备和接收器设备之间的健壮性和互操作性。由于链路速率与流速率解耦，即使显示端口链路传输的时间发生变化，也可以保持活动和稳定。</p>
